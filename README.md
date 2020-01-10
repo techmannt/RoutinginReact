@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Routing in React
 
-## Available Scripts
+## Getting Started
+1. Create a new project with Create React App.
+2. Delete the src directory and all of its contents.
+3. Create a new src directory and a new `index.js` file inside of src.
+4. Create a new directory named components inside of src.
+5. Move your `assets` directory into src.
 
-In the project directory, you can run:
+You should now have a project structure that resembles the following:
+```bash
+node_modules/
+public/
+src/
+|- assets/
+|--- logo.png
+|- components/
+|- index.js
+.gitignore
+package-lock.json
+package.json
+README.md
+```
 
-### `npm start`
+Before starting the following tasks, make sure that the Chrome Developer Tools are open in your "localhost:3000" tab, and that you also have the React Developer Tools installed. You should be checking these as much as possible to not only troubleshoot these tasks, but to confirm your understanding of what you are doing. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**In this lab, it is also helpful to check your 'Network' tab in the Chrome Developer Tools when you are making HTTP Requests (or expecting HTTP Responses).**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Each time you save your files while completing these tasks, check the terminal and browser for compilation errors, and pay attention to what they are telling you. For example, if something is "undefined", why does React think that? What should be defined, and where?
 
-### `npm test`
+## Objectives
+**DESIGN CONSTRAINT:** You may only render one component in `index.js`.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This lab builds upon the skills you learned in `reacting-to-apis`, but it is not essential to fully complete `reacting-to-apis` before proceeding with this lab. 
 
-### `npm run build`
+In this lab assignment, your primary objective is to **create multiple routes in your application** based on the data you receive from a request to a third-party API. Only certain data will be loaded (and therefore rendered) based on the route you are navigating to in the application.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The API we will be using is the [Studio Ghibli API](https://ghibliapi.herokuapp.com/). 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### After each step, commit your changes in Git, and push them to a GitHub repository on your GitHub profile. If you need a refresher on creating repositories and pushing to GitHub, check out the "Getting Started at Covalence" course.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+----
 
-### `npm run eject`
+### Tasks
+1. Configure React Router in your application. You may use the same structure as the walkthrough video, or (if you have a better idea) you may decide on your own structure. Just make sure that it works! Next, you should create three Links that look like buttons in your application. The first says "Go Home", the second says "View Films", and the last one says "View People" (or another endpoint of your choosing). Clicking these links will navigate you to the respective pages for each of these things.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Start by only configuring ONE route. Say, for `/films`. After navigating to `localhost:3000/films`, you should see your list of films that you rendered to the browser in the previous lab. The caveat? You shouldn't need **any** if/else if/else logic in your render methods. The data should only be loaded and displayed when you navigate to `/films`. You should use `componentDidMount()` and `fetch` to make this request.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Once you have that route working, configure another one for `/films/:id`. With this route, you should be able to click on a Link for any film you have displayed on `/films` to navigate to that specific film's webpage where you will list out all of the information pertaining to _only_ that film.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+4. Now that you have `/film` and `/film/:id` working, repeat tasks 1 and 2 with another endpoint (like People) in the Studio Ghibli API. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+At the end of these tasks, you should have at least FIVE pages in your application, and you should be able to navigate to them simply by clicking a link. 
 
-## Learn More
+----
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#### At the end of this lab, you should have a Studio Ghibli "wiki" based on the data available through the API. You can extend this as much as you want - style it as much as you want - but at the end of the day you should realize that what you've just done is create your first real application using only data provided by a third-party API! This is what web developers _all the time_ so give yourself a pat on the back, and keep coding!

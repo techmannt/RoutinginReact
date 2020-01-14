@@ -5,6 +5,7 @@ class Film extends Component {
     super(props);
     this.state = {
       filmInfo: {},
+      loaded: false,
       id: this.props.match.params.id
     }
   }
@@ -13,29 +14,34 @@ class Film extends Component {
     let films = await fetch("https://ghibliapi.herokuapp.com/films/" + this.state.id);
     let filmInfo = await films.json();
     this.setState({
+      loaded: true,
       filmInfo
     });
   }
 
   render() {
+    if (this.state.loaded) {
+      return (
+        <div className="py-1" key={this.state.filmInfo.id}>
 
-    return (
-      <div className="py-1" key={this.state.filmInfo.id}>
-
-        <div className="card">
-          <div className="card-body shadow">
-            <h4 className="card-title">{this.state.filmInfo.title}</h4>
-            <p className="body-text">{this.state.filmInfo.description}</p>
-            <p className="body-text">Director: {this.state.filmInfo.director}</p>
-            <p className="body-text">Producer: {this.state.filmInfo.producer}</p>
-            <p className="body-text">Score: {this.state.filmInfo.rt_score}</p>
-            <p className="body-text text-muted">Release date: {this.state.filmInfo.release_date}</p>
-
+          <div className="card">
+            <div className="card-body shadow">
+              <h4 className="card-title">{this.state.filmInfo.title}</h4>
+              <p className="body-text">{this.state.filmInfo.description}</p>
+              <p className="body-text">Director: {this.state.filmInfo.director}</p>
+              <p className="body-text">Producer: {this.state.filmInfo.producer}</p>
+              <p className="body-text">Score: {this.state.filmInfo.rt_score}</p>
+              <p className="body-text text-muted">Release date: {this.state.filmInfo.release_date}</p>
+            </div>
           </div>
-        </div>
 
-      </div>
-    )
+        </div>
+      )
+    } else {
+      return (
+        <h1>Loading...</h1>
+      )
+    }
 
   }
 

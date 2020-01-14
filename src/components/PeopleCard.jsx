@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import DisplayPeopleCard from './DisplayPeopleCard';
 
-const PeopleCard = (props) => {
+class PeopleCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filmInfo: [],
+      loaded: false
+    }
+  }
 
-  return (  // No fragment needed here since <main> is used.
+  async componentDidMount() {
+    let films = await fetch("https://ghibliapi.herokuapp.com/people");
+    let filmInfo = await films.json();
+    this.setState({
+      loaded: true,
+      filmInfo
+    });
+  }
 
-    <main className="container">
-      {props.peopleInfo.map(person => {
-        return (
-
-          <div className="py-1" key={person.id}>
-            <DisplayPeopleCard people={person} />
+  render() {
+    if (this.state.loaded) {
+      return (
+        <main className="container">
+          {this.state.filmInfo.map(film => {
+          return(
+            <div key={film.id} className="col-md-7 mx-auto">
+            <DisplayPeopleCard people={film} />
           </div>
+          )
+        })}
+        </main>
+      )
+    } else {
+      return (
+        <h1>Loading...</h1>
+      )
+    }
+  }
 
-        )
-      })}
-    </main>
-  )
 }
 
 export default PeopleCard;
